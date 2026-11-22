@@ -1,0 +1,22 @@
+# Core Computer Vision & Deep Learning
+ultralytics>=8.3.0
+torch>=2.0.0
+torchvision>=0.15.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+pillow>=10.0.0
+
+# Web Dashboard & Interactive UI (Pure Python)
+streamlit>=1.35.0
+plotly>=5.20.0
+pandas>=2.0.0
+
+# PDF Report Generation & Data Visualization
+reportlab>=4.0.0
+matplotlib>=3.8.0
+
+# Database Persistence
+sqlalchemy>=2.0.0
+
+# Testing & Quality Assurance
+pytest>=8.0.0
