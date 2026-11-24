@@ -64,5 +64,7 @@ $$\text{MAPE} = \frac{1}{N} \sum_{i=1}^N \left| \frac{D_{actual, i} - D_{pred, i
 | **Model Inference Time (CPU)** | $\le 120\text{ ms / frame}$ | Python `time.perf_counter()` on 8-core CPU |
 | **Size Geometry Computation** | $\le 15\text{ ms / bulb}$ | OpenCV contour & ellipse fitting latency |
 | **PDF Report Generation** | $\le 1.5\text{ seconds}$ | ReportLab file export timer |
-| **End-to-End Pipeline Latency** | $\le 1.0\text{ second}$ | Total elapsed time from snapshot capture to UI render |
+| **FastAPI REST API Round-Trip** | $\le 150\text{ ms}$ | HTTP multipart request to JSON response latency |
+| **DB Audit Log & Image Storage** | $\le 80\text{ ms}$ | SQLite/PostgreSQL write & SHA-256 hash calculation |
+| **End-to-End Pipeline Latency** | $\le 1.2\text{ seconds}$ | Total elapsed time from React capture to UI render |
 | **Model Footprint** | $\le 25\text{ MB}$ (FP16/INT8) | `.pt` file size on disk for lightweight edge deployment |

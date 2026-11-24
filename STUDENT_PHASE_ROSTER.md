@@ -9,7 +9,7 @@
 
 ## ⚡ Live Phase Status Tracker
 
-> **Independent Execution**: Har teammate apne assigned phases ka sole owner hai. Jaise hi kisi teammate ka code/task complete hota hai, woh seedha apna status [x] DONE tick karega. Kisi doosre teammate ke approval ya agreement ki zaroorat nahi hai.
+> **Independent Execution**: Har teammate apne assigned phases ka sole owner hai. Jaise hi kisi teammate ka code/task complete hota hai, woh seedha apna status `[x] DONE` tick karega. Kisi doosre teammate ke approval ya agreement ki zaroorat nahi hai.
 
 | Phase | Assigned Student | Phase Title | Status |
 | :---: | :--- | :--- | :---: |
@@ -21,10 +21,10 @@
 | **Phase 6** | **Bablu** | Onion Contour Geometry & Physical Diameter Estimation | `[ ] PENDING` |
 | **Phase 7** | **Chethan** | Configurable Rule-Based Grading Engine (`grading_rules.json`)| `[ ] PENDING` |
 | **Phase 8** | **Chethan** | Automated Digital PDF Quality Report Generator | `[ ] PENDING` |
-| **Phase 9** | **Gautam** | Streamlit Web UI with Dual-Input (Upload + Live Webcam) | `[ ] PENDING` |
-| **Phase 10** | **Gautam** | Human-in-the-Loop Review System & Visual Analytics | `[ ] PENDING` |
-| **Phase 11** | **Rithvik Teja** | Database Persistence, History & Traceability (SQLite) | `[ ] PENDING` |
-| **Phase 12** | **Rithvik Teja** | End-to-End Pipeline Integration, Testing & Final Evaluation | `[ ] PENDING` |
+| **Phase 9** | **Gautam** | React Web Application with Dual-Input (Batch Upload + Live WebRTC Webcam) | `[ ] PENDING` |
+| **Phase 10** | **Gautam** | Human-in-the-Loop Review System & Real-Time Analytics UI (React) | `[ ] PENDING` |
+| **Phase 11** | **Rithvik Teja** | FastAPI REST API, Database & Media Storage Architecture (SQLAlchemy + Image Store) | `[ ] PENDING` |
+| **Phase 12** | **Rithvik Teja** | End-to-End System Integration (React + FastAPI + Vision), Testing & Final Evaluation | `[ ] PENDING` |
 
 ---
 
@@ -32,12 +32,12 @@
 
 | # | Student Name | Allocated Phases | Role Title | Core Deliverables |
 | :-: | :--- | :--- | :--- | :--- |
-| **1** | **Ajay** | **Phase 1 & Phase 2** | Project Foundation & Dataset Strategy Lead | Base architecture, `requirements.txt`, collection protocol, annotation ontology |
+| **1** | **Ajay** | **Phase 1 & Phase 2** | Project Foundation & Dataset Strategy Lead | Base architecture, backend requirements, React scaffolding, collection protocol |
 | **2** | **Ameg** | **Phase 3 & Phase 4** | Data Engineering & Deep Learning Lead | Annotated YOLO dataset, trained weights (`best.pt`), mAP evaluation curves |
 | **3** | **Bablu** | **Phase 5 & Phase 6** | Computer Vision & Calibration Specialist | ArUco/Coin calibrator (`calibrator.py`), equatorial diameter estimator (`size_estimator.py`), MAE size error report |
 | **4** | **Chethan** | **Phase 7 & Phase 8** | Business Logic & PDF Reporting Engineer | Configurable rules engine (`grading_engine.py` + `grading_rules.json`), automated PDF inspection certificate (`pdf_generator.py`) |
-| **5** | **Gautam** | **Phase 9 & Phase 10** | Full-Stack Python UI & Interactive Experience Lead | Streamlit web application (`app.py`), Dual-Input (File Upload + Live Laptop Webcam), Human-in-the-Loop Review UI |
-| **6** | **Rithvik Teja** | **Phase 11 & Phase 12** | Database, System Integration & QA Lead | SQLite audit persistence (`models.py`, `db_service.py`), end-to-end integration, performance benchmarking & viva runbook |
+| **5** | **Gautam** | **Phase 9 & Phase 10** | React Frontend & Interactive UI Lead | React SPA (`frontend/`), Dual-Input (Upload + WebRTC Webcam), Human Review UI & Charts |
+| **6** | **Rithvik Teja** | **Phase 11 & Phase 12** | FastAPI Backend, Database & QA Lead | FastAPI REST API (`src/api/`), Hybrid DB & Media Store (`image_store.py`), E2E testing |
 
 ---
 
@@ -49,8 +49,8 @@
 * **Allocated Phases**: **Phase 1 & Phase 2**
 * **Primary Role**: Project Foundation, Architecture & Dataset Planning
 * **Detailed Responsibilities**:
-  1. Setup and maintain project environment, package locks in `requirements.txt`, and base folder structure.
-  2. Maintain system architecture specs in `ARCHITECTURE.md`.
+  1. Setup and maintain backend environment in `requirements.txt` and frontend scaffolding in `frontend/`.
+  2. Maintain decoupled system architecture specs in `ARCHITECTURE.md`.
   3. Formulate data collection protocols (lighting, distance, angle, reference markers) in `DATASET_GUIDELINES.md`.
   4. Define standard visual taxonomy for the 4 classes (`Healthy`, `Damaged`, `Rotten`, `Sprouted`).
   5. Setup shared annotation project workspace (Roboflow / CVAT).
@@ -93,36 +93,38 @@
   2. Develop `src/grading/grading_engine.py` to evaluate individual bulb size and defects into **Grade A**, **Grade B**, and **URS** (Under-Sized / Rejected).
   3. Compute lot-level percentages and batch acceptance verdicts (Accept if $\text{URS} \le 10\%$, Reject if $\text{URS} > 20\%$).
   4. Develop `src/reports/pdf_generator.py` using ReportLab to generate digital inspection certificates.
-  5. Automatically embed inspection lot details, summary scorecards, defect pie charts, individual item tables, and audit timestamps.
+  5. Automatically embed inspection lot details, summary scorecards, defect pie charts, individual item tables, SHA-256 checksums, and audit timestamps.
 * **Expected Output**: `src/grading/grading_rules.json`, `src/grading/grading_engine.py`, `src/reports/pdf_generator.py`, sample certified PDF report.
 
 ---
 
 ### 5. Gautam
 * **Allocated Phases**: **Phase 9 & Phase 10**
-* **Primary Role**: Full-Stack Python Web UI, Dual-Input Handling & Human Review
+* **Primary Role**: React Frontend, Dual-Input Handling & Human Review Experience Lead
 * **Detailed Responsibilities**:
-  1. Develop the pure-Python interactive web dashboard `src/ui/app.py` using Streamlit.
+  1. Develop the React Single Page Application in `frontend/` using Vite.
   2. Implement **Dual-Input Mode**:
-     - File Upload mode for batch image processing (`st.file_uploader`).
-     - **Live Laptop Webcam Mode** (`st.camera_input`) allowing examiners/teachers to show onions directly to the webcam and test live.
-  3. Overlay detection masks, bounding boxes, size annotations, and color-coded status badges on input frames.
-  4. Build the **Human-in-the-Loop Review System**: automatically flag predictions with confidence $< 70\%$ and provide interactive override dropdowns.
-  5. Integrate dynamic re-grading and interactive analytics charts (Plotly defect donut chart and size distribution histogram).
-* **Expected Output**: Complete Streamlit web app in `src/ui/app.py` with dual-input camera, review interface, and chart dashboard.
+     - Batch File Upload mode with drag-and-drop and image thumbnail previews.
+     - **Live WebRTC Webcam Mode** allowing examiners/inspectors to capture snapshots directly in the browser.
+  3. Overlay detection masks, bounding boxes, size annotations, and color-coded status badges on inspected frames.
+  4. Build the **Human-in-the-Loop Review System**: automatically flag predictions with confidence $< 70\%$, provide cropped bulb previews, and offer interactive override controls.
+  5. Integrate dynamic re-grading and interactive analytics charts (defect distribution chart and size distribution histogram).
+  6. Connect UI buttons to download official PDF certificates from the FastAPI backend.
+* **Expected Output**: Complete React application in `frontend/` with dual-input camera, review interface, and chart dashboard.
 
 ---
 
 ### 6. Rithvik Teja
 * **Allocated Phases**: **Phase 11 & Phase 12**
-* **Primary Role**: Database Persistence, End-to-End Integration & System QA
+* **Primary Role**: FastAPI REST API, Database & Media Storage Architecture, System QA Lead
 * **Detailed Responsibilities**:
-  1. Design and maintain SQLite relational database schema using SQLAlchemy (`src/database/models.py`).
-  2. Implement data access services (`src/database/db_service.py`) to record inspection sessions, bulb measurements, and audit trails.
-  3. Add an "Inspection History" viewer in the UI allowing operators to browse past inspections and re-download past PDF reports.
-  4. Integrate all modules (UI + Calibrator + YOLO AI + Grading + PDF + DB) into an end-to-end automated pipeline.
-  5. Conduct integration testing (`pytest tests/`), measure inference latency/FPS, compile final metrics in `EVALUATION_METRICS.md`, and write viva demo runbook.
-* **Expected Output**: `src/database/models.py`, `src/database/db_service.py`, integration test suite in `tests/test_pipeline.py`, benchmark report, and viva demo script.
+  1. Build asynchronous FastAPI REST API application (`src/main.py` and `src/api/`).
+  2. Design and maintain SQLAlchemy relational database schema supporting SQLite (local mandi) and PostgreSQL (cloud) (`src/database/models.py`).
+  3. Implement dedicated media storage manager (`src/storage/image_store.py`) to store raw uploads, annotated overlays, and PDFs in `data/storage/` with SHA-256 cryptographic verification.
+  4. Implement data access services (`src/database/db_service.py`) for inspection sessions, bulb measurements, and audit logs.
+  5. Integrate all modules (React Frontend + FastAPI + Calibrator + YOLO AI + Grading + PDF + DB) into an end-to-end automated pipeline.
+  6. Conduct integration testing (`pytest tests/`), measure end-to-end latency, compile final metrics in `EVALUATION_METRICS.md`, and write viva demo runbook.
+* **Expected Output**: `src/main.py`, `src/api/`, `src/database/models.py`, `src/storage/image_store.py`, integration test suite in `tests/test_pipeline.py`, benchmark report, and viva demo script.
 
 ---
 
@@ -131,5 +133,5 @@
 1. **Ajay ➔ Ameg**: Ajay finalizes data collection standards and sets up Roboflow; Ameg labels the data and trains the YOLO model.
 2. **Ameg ➔ Bablu**: Ameg provides segmentation masks (`best.pt`); Bablu calculates millimeter sizes using his calibration engine.
 3. **Bablu ➔ Chethan**: Bablu supplies sizes and Ameg supplies defect classes; Chethan applies grading rules and generates the PDF certificate.
-4. **Chethan ➔ Gautam**: Chethan's grading logic and PDF engine are wired into Gautam's Streamlit dashboard with live camera and review controls.
-5. **Gautam ➔ Rithvik Teja**: Gautam's user interactions and lot results are persisted by Rithvik Teja into the database, tested end-to-end, and benchmarked for final viva defense.
+4. **Chethan ➔ Gautam & Rithvik Teja**: Chethan's grading logic and PDF generator are exposed via FastAPI REST endpoints by Rithvik Teja and rendered in Gautam's React dashboard.
+5. **Gautam ➔ Rithvik Teja**: Gautam's React UI sends inspections and human review overrides via REST API to Rithvik Teja's FastAPI backend, which handles DB persistence, SHA-256 image storage, and end-to-end QA.

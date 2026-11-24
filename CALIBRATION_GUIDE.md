@@ -67,7 +67,7 @@ When demonstrating size estimation to your teacher/examiner using a laptop webca
 1. **Keep the Lens Stable**: Place the laptop flat on a table and angle the screen so the webcam points down at the desk surface or sorting sheet.
 2. **Keep the Onion and Marker on the Same Plane**: The reference coin/marker must be placed flat on the table directly beside the onion bulb.
 3. **Avoid Tilting**: Holding the onion in mid-air closer to the lens than the table will artificially magnify the onion relative to the marker. Always rest both on the table surface.
-4. **Trigger Snapshot**: Press "Capture Snapshot" in Streamlit; the calibration engine extracts the scale and calculates the onion diameter in real time.
+4. **Trigger Snapshot**: Press "Capture Snapshot" in the React Web UI; the frame is transmitted via REST API to the FastAPI backend, where the calibration engine extracts the scale and calculates the onion diameter in real time.
 
 ---
 
